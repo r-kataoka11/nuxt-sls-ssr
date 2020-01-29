@@ -1,6 +1,7 @@
 # nuxt-sls-ssr
 
 Nuxt.jsとServerless Framework（AWS）でサーバーサイドレンダリングするサンプルです。
+
 WordPressのREST APIから情報を非同期取ってきて、記事一覧と記事詳細ページを表示します。
 
 ## はじめに
@@ -12,12 +13,15 @@ WordPressのREST APIから情報を非同期取ってきて、記事一覧と記
 $ npm install
 ```
 
+
 2. aws-cliでAWSの設定を行ってください。
+
 https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-configure.html
 
 ``` bash
 $ aws configure
 ```
+
 
 3. nuxt.config.jsのsiteUrlに表示したいWordPressサイトのURL（/wp-json前まで）を入力してください。
 
@@ -27,12 +31,18 @@ env: {
 }
 ```
 
+
 4. Route53にパブリックホストゾーンを作成してください
+
 https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/CreatingHostedZone.html
+
 所有中のドメインがある場合は、Route53に移管 or ネームサーバーを向ける等してください。
+
 ドメインがない場合は、Route53のコンソールから「登録済みドメイン」を選択し、ドメインを購入してください。
 
+
 5. Certificate Manager（ACM）でパブリック証明書を発行してください
+
 ACMのコンソールの「証明書のリクエスト」から「パブリック証明書のリクエスト」を選択し、ドメイン名（Route53に登録したもの）を入力して発行してください。
 
 
@@ -45,6 +55,7 @@ custom:
     domainName: '${self:provider.stage}.yourdomain.com'
     certificateName: '*.yourdomain.com'
 ```
+
 
 5. serverless.ymlに記入した名前とリージョン名でS3にバケットを作ります。
 
