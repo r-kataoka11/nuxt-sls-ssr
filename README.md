@@ -46,7 +46,7 @@ https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/CreatingHostedZo
 ACMのコンソールの「証明書のリクエスト」から「パブリック証明書のリクエスト」を選択し、ドメイン名（Route53に登録したもの）を入力して発行してください。
 
 
-4. serverless.ymlにデプロイ先のドメインと名前を入力してください.
+6. serverless.ymlにデプロイ先のドメインと名前を入力してください.
 
 ``` serverless.yml
 custom:
@@ -57,7 +57,7 @@ custom:
 ```
 
 
-5. serverless.ymlに記入した名前とリージョン名でS3にバケットを作ります。
+7. serverless.ymlに記入した名前とリージョン名でS3にバケットを作ります。
 
 
 ## 開発スタート！
