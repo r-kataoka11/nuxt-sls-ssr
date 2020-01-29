@@ -1,0 +1,45 @@
+service: ${self:custom.name}
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    NODE_ENV: production
+  deploymentBucket:
+    name: ${self:custom.name}.${self:provider.region}.deploys
+
+custom:
+  name: 'nuxt-sls-ssr'
+  customDomain:
+    domainName: '${self:provider.stage}.yourdomain.com'
+    certificateName: '*.yourdomain.com'
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+  serverless-offline:
+    port: 4000
+  apigwBinary:
+    types:
+      - '*/*'
+
+package:
+  exclude:
+    - src/**
+  include:
+    - serverless.yml
+
+functions:
+  nuxt-renderer:
+    handler: server/handler.render
+    memorySize: 512
+    timeout: 30
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
+
+plugins:
+  - serverless-offline
+  - serverless-apigw-binary
+  - serverless-domain-manager
